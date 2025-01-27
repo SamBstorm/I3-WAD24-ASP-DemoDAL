@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[Cocktail]
+(
+	[Cocktail_Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
+	[Name] NVARCHAR(64) NOT NULL,
+	[Description] NVARCHAR(512),
+	[Instructions] NVARCHAR(MAX) NOT NULL,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
+	[CreatedBy] UNIQUEIDENTIFIER,
+	CONSTRAINT [PK_Cocktail] PRIMARY KEY ([Cocktail_Id]),
+	CONSTRAINT [FK_Cocktail_User] FOREIGN KEY ([CreatedBy])
+	REFERENCES [User] ([User_Id])
+	ON DELETE SET NULL
+)
