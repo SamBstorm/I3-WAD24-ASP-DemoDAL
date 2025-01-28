@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using DAL.Mappers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,31 @@ namespace DAL.Services
                     {
                         while (reader.Read())
                         {
-                            User result = new User()
-                            {
-                                User_Id = (Guid)reader[nameof(User.User_Id)],
-                                First_Name = (string)reader[nameof(User.First_Name)],
-                                Last_Name = (string)reader[nameof(User.Last_Name)],
-                                Email = (string)reader[nameof(User.Email)],
-                                Password = "********",
-                                CreatedAt = (DateTime)reader[nameof(User.CreatedAt)],
-                                DisabledAt = (reader[nameof(User.DisabledAt)] is DBNull)? null : (DateTime?)reader[nameof(User.DisabledAt)]
-                            };
-                            yield return result;
+                            yield return reader.ToUser();
+                        }
+                    }
+                }
+            }
+        }
+
+        public User Get(Guid user_id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_User_GetById";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(user_id), user_id);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader.ToUser();
+                        }
+                        else {
+                            throw new ArgumentOutOfRangeException(nameof(user_id));
                         }
                     }
                 }
