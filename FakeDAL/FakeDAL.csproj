@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\FakeDAL\FakeDAL.csproj" />
   </ItemGroup>
 
 </Project>

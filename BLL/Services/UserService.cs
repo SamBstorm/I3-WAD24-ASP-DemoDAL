@@ -1,19 +1,20 @@
 ﻿using BLL.Entities;
 using BLL.Mappers;
-using D = DAL.Services;
+using D = DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Repositories;
 
 namespace BLL.Services
 {
-    public class UserService
+    public class UserService : IUserRepository<User>
     {
-        private D.UserService _service;
+        private IUserRepository<D.User> _service;
 
-        public UserService(D.UserService userService)
+        public UserService(IUserRepository<D.User> userService)
         {
             _service = userService;    
         }

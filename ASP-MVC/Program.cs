@@ -1,3 +1,5 @@
+using Common.Repositories;
+
 namespace ASP_MVC
 {
     public class Program
@@ -10,8 +12,8 @@ namespace ASP_MVC
             builder.Services.AddControllersWithViews();
 
             //Ajout de nos services : Ceux de la BLL et ceux de la DAL
-            builder.Services.AddScoped<BLL.Services.UserService>();
-            builder.Services.AddScoped<DAL.Services.UserService>();
+            builder.Services.AddScoped<IUserRepository<BLL.Entities.User>, BLL.Services.UserService>();
+            builder.Services.AddScoped<IUserRepository<DAL.Entities.User>, FakeDAL.Services.UserService>();
 
             var app = builder.Build();
 
