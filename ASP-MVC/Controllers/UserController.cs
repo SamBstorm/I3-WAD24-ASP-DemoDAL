@@ -10,9 +10,9 @@ namespace ASP_MVC.Controllers
     {
         private UserService _userService;
 
-        public UserController()
+        public UserController(UserService userService)
         {
-            _userService = new UserService();
+            _userService = userService;
         }
 
         // GET: UserController

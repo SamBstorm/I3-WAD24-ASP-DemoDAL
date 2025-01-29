@@ -13,9 +13,9 @@ namespace BLL.Services
     {
         private D.UserService _service;
 
-        public UserService()
+        public UserService(D.UserService userService)
         {
-            _service = new D.UserService();    
+            _service = userService;    
         }
 
         public IEnumerable<User> Get()
