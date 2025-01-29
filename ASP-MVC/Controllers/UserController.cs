@@ -29,9 +29,17 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: UserController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            try
+            {
+                UserDetails model = _userService.Get(id).ToDetails();
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: UserController/Create
