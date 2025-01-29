@@ -16,7 +16,8 @@ namespace DAL.Services
 
         public IEnumerable<User> Get()
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "SP_User_GetAllActive";
@@ -49,10 +50,78 @@ namespace DAL.Services
                         {
                             return reader.ToUser();
                         }
-                        else {
+                        else
+                        {
                             throw new ArgumentOutOfRangeException(nameof(user_id));
                         }
                     }
+                }
+            }
+        }
+
+        public Guid Insert(User user)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_User_Insert";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(User.First_Name), user.First_Name);
+                    command.Parameters.AddWithValue(nameof(User.Last_Name), user.Last_Name);
+                    command.Parameters.AddWithValue(nameof(User.Email), user.Email);
+                    command.Parameters.AddWithValue(nameof(User.Password), user.Password);
+                    connection.Open();
+                    return (Guid)command.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(Guid user_id, User user)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_User_Update";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(user_id), user_id);
+                    command.Parameters.AddWithValue(nameof(User.First_Name), user.First_Name);
+                    command.Parameters.AddWithValue(nameof(User.Last_Name), user.Last_Name);
+                    command.Parameters.AddWithValue(nameof(User.Email), user.Email);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(Guid user_id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_User_Delete";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(user_id), user_id);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Guid CheckPassword(string email, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_User_CheckPassword";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(email), email);
+                    command.Parameters.AddWithValue(nameof(password), password);
+                    connection.Open();
+                    return (Guid)command.ExecuteScalar();
                 }
             }
         }
