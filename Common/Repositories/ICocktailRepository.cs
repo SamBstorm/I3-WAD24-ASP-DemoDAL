@@ -9,9 +9,9 @@ namespace Common.Repositories
     public interface ICocktailRepository<TCocktail>
     {
         IEnumerable<TCocktail> Get();
-        TCocktail Get(Guid id);
+        TCocktail Get(Guid cocktail_id);
         Guid Insert(TCocktail cocktail);
-        void Update(Guid id, TCocktail cocktail);
-        void Delete(Guid id);
+        void Update(Guid cocktail_id, TCocktail cocktail);
+        void Delete(Guid cocktail_id);
     }
 }
