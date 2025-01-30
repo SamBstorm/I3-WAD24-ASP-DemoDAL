@@ -41,5 +41,11 @@ namespace BLL.Entities
             Email = email;
             Password = password;
         }
+
+        public User(string first_Name, string last_Name, string email) {
+            First_Name = first_Name;
+            Last_Name = last_Name;
+            Email = email;
+        }
     }
 }

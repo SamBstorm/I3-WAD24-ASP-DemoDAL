@@ -68,18 +68,28 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            try
+            {
+                UserEditForm model = _userService.Get(id).ToEditForm();
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, UserEditForm form)
         {
             try
             {
+                if (!ModelState.IsValid) throw new ArgumentException(nameof(form));
+                _userService.Update(id, form.ToBLL());
                 return RedirectToAction(nameof(Index));
             }
             catch

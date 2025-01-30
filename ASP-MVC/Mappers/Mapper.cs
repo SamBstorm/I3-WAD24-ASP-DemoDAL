@@ -46,5 +46,33 @@ namespace ASP_MVC.Mappers
                 user.Email,
                 user.Password);*/
         }
+
+        public static UserEditForm ToEditForm (this User user)
+        {
+            if(user is null) throw new ArgumentNullException(nameof(user));
+            return new UserEditForm() { 
+                First_Name = user.First_Name,
+                Last_Name = user.Last_Name,
+                Email = user.Email
+            };
+        }
+
+        public static User ToBLL(this UserEditForm user)
+        {
+            if(user is null) throw new ArgumentNullException(nameof(user));
+            /*return new User(
+                Guid.Empty,
+                user.First_Name,
+                user.Last_Name,
+                user.Email,
+                "********",
+                DateTime.Now,
+                null
+                );*/
+            return new User(
+                user.First_Name,
+                user.Last_Name,
+                user.Email);
+        }
     }
 }
