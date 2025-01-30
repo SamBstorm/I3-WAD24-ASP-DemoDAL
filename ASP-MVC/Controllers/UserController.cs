@@ -52,11 +52,14 @@ namespace ASP_MVC.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!form.Consent) ModelState.AddModelError(nameof(form.Consent),"Vous devez lire et accepter les conditions générales d'utilisation.");
+                if (!ModelState.IsValid) throw new ArgumentException();
+                Guid id = _userService.Insert(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id = id });
             }
             catch
             {

@@ -33,5 +33,13 @@ namespace BLL.Entities
             CreatedAt = createdAt;
             _disabledAt = disabledAt;
         }
+
+        public User(string first_Name, string last_Name, string email, string password)
+        {
+            First_Name = first_Name;
+            Last_Name = last_Name;
+            Email = email;
+            Password = password;
+        }
     }
 }
