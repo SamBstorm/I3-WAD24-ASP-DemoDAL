@@ -13,7 +13,7 @@ namespace ASP_MVC
 
             //Ajout de nos services : Ceux de la BLL et ceux de la DAL
             builder.Services.AddScoped<IUserRepository<BLL.Entities.User>, BLL.Services.UserService>();
-            builder.Services.AddScoped<IUserRepository<DAL.Entities.User>, FakeDAL.Services.UserService>();
+            builder.Services.AddScoped<IUserRepository<DAL.Entities.User>, DAL.Services.UserService>();
 
             var app = builder.Build();
 

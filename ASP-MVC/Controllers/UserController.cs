@@ -9,9 +9,9 @@ namespace ASP_MVC.Controllers
 {
     public class UserController : Controller
     {
-        private IUserRepository<User> _userService;
+        private IUserRepository<BLL.Entities.User> _userService;
 
-        public UserController(IUserRepository<User> userService)
+        public UserController(IUserRepository<BLL.Entities.User> userService)
         {
             _userService = userService;
         }

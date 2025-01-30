@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FakeDAL.Services
 {
-    public class UserService : IUserRepository<User>
+    public class UserService : IUserRepository<DAL.Entities.User>
     {
         private static List<User> _users = new List<User>() { 
             new User (){ 

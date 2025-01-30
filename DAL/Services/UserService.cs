@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class UserService : IUserRepository<User>
+    public class UserService : IUserRepository<DAL.Entities.User>
     {
         private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WAD24-DemoASP-DB;Integrated Security=True;";
 
