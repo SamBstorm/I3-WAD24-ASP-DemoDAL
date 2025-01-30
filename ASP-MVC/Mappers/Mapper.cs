@@ -74,5 +74,15 @@ namespace ASP_MVC.Mappers
                 user.Last_Name,
                 user.Email);
         }
+
+        public static UserDelete ToDelete(this User user)
+        {
+            if (user is null) throw new ArgumentNullException(nameof(user));
+            return new UserDelete() { 
+                First_Name = user.First_Name,
+                Last_Name = user.Last_Name,
+                Email = user.Email
+            };
+        }
     }
 }

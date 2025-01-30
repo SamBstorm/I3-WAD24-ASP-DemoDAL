@@ -94,28 +94,37 @@ namespace ASP_MVC.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            try
+            {
+                UserDelete model = _userService.Get(id).ToDelete();
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error","Home");
+            }
         }
 
         // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, UserDelete form)
         {
             try
             {
+                _userService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Delete), new { id = id });
             }
         }
     }
