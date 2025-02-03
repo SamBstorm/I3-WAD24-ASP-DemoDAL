@@ -115,7 +115,7 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id, CocktailEditForm form)
+        public ActionResult Delete(Guid id, CocktailDelete form)
         {
             try
             {

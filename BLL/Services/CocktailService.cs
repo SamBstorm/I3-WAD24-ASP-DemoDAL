@@ -13,10 +13,11 @@ namespace BLL.Services
     {
         private ICocktailRepository<DAL.Entities.Cocktail> _service;
 
-        public CocktailService()
+        public CocktailService(ICocktailRepository<DAL.Entities.Cocktail> service)
         {
-            _service = new DAL.Services.CocktailService();
+            _service = service;
         }
+
         public void Delete(Guid cocktail_id)
         {
             _service.Delete(cocktail_id);
