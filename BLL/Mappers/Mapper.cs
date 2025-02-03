@@ -10,20 +10,22 @@ namespace BLL.Mappers
 {
     internal static class Mapper
     {
+        #region Users
         public static User ToBLL(this D.User user)
         {
-            if(user is null) throw new ArgumentNullException(nameof(user));
+            if (user is null) throw new ArgumentNullException(nameof(user));
             return new User(
-                user.User_Id, 
-                user.First_Name, 
-                user.Last_Name, 
-                user.Email, 
-                user.Password, 
-                user.CreatedAt, 
+                user.User_Id,
+                user.First_Name,
+                user.Last_Name,
+                user.Email,
+                user.Password,
+                user.CreatedAt,
                 user.DisabledAt);
         }
 
-        public static D.User ToDAL(this User user) {
+        public static D.User ToDAL(this User user)
+        {
             if (user is null) throw new ArgumentNullException(nameof(user));
             return new D.User()
             {
@@ -36,5 +38,35 @@ namespace BLL.Mappers
                 DisabledAt = (user.IsDisabled) ? new DateTime() : null
             };
         }
+        #endregion
+
+        #region Cocktails
+        public static Cocktail ToBLL(this D.Cocktail cocktail)
+        {
+            if (cocktail is null) throw new ArgumentNullException(nameof(cocktail));
+            return new Cocktail(
+                cocktail.Cocktail_Id,
+                cocktail.Name,
+                cocktail.Description,
+                cocktail.Instructions,
+                DateOnly.FromDateTime(cocktail.CreatedAt),
+                cocktail.CreatedBy
+                );
+        }
+
+        public static D.Cocktail ToDAL(this Cocktail cocktail)
+        {
+            if (cocktail is null) throw new ArgumentNullException(nameof(cocktail));
+            return new D.Cocktail()
+            {
+                Cocktail_Id = cocktail.Cocktail_Id,
+                Name = cocktail.Name,
+                Description = cocktail.Description,
+                Instructions = cocktail.Instructions,
+                CreatedAt = cocktail.CreatedAt.ToDateTime(new TimeOnly()),
+                CreatedBy = cocktail.CreatedBy
+            };
+        }
+        #endregion
     }
 }
