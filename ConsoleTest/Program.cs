@@ -1,5 +1,5 @@
-﻿using DAL.Entities;
-using DAL.Services;
+﻿using BLL.Entities;
+using BLL.Services;
 
 namespace ConsoleTest
 {
