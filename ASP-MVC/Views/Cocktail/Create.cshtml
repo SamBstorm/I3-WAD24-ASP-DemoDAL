@@ -1,7 +1,15 @@
-﻿@model ASP_MVC.Models.Cocktail.CocktailCreateForm
+﻿@using Common.Repositories
+@using BLL.Entities
+@inject IUserRepository<User> _userService;
+
+@model ASP_MVC.Models.Cocktail.CocktailCreateForm
 
 @{
     ViewData["Title"] = "Create";
+
+    IEnumerable<SelectListItem> userOptions = _userService.Get().Select(
+        bll => new SelectListItem() {Value = bll.User_Id.ToString(), Text = $"{bll.First_Name} {bll.Last_Name}"}
+    );
 }
 
 <h1>🍸Quel nouveau cocktail allez-vous nous servir?</h1>
@@ -29,7 +37,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
+                <select asp-for="CreatedBy" asp-items="userOptions" class="form-control">
+                    <option disabled selected>Veuillez sélectionner un utilisateur</option>
+                </select>
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
