@@ -15,6 +15,7 @@ namespace ASP_MVC.Models.Cocktail
         [MaxLength(512, ErrorMessage = "Le champ 'Description' doit contenir au maximum 512 caractères.")]
         public string? Description { get; set; }
         [DisplayName("Recette : ")]
+        [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Le champ 'Recette' est obligatoire.")]
         [MinLength(2, ErrorMessage = "Le champ 'Recette' doit contenir au minimum 2 caractères.")]
         public string Instructions { get; set; }

@@ -12,10 +12,12 @@ namespace ASP_MVC.Models.Cocktail
         [DisplayName("Description : ")]
         public string? Description { get; set; }
         [DisplayName("Recette : ")]
+        [DataType(DataType.MultilineText)]
         public string Instructions { get; set; }
         [DisplayName("Créé par : ")]
         public Guid? CreatedBy { get; set; }
         [DisplayName("Créé le : ")]
+        [DataType(DataType.Date)]
         public DateOnly CreatedAt { get; set; }
     }
 }
