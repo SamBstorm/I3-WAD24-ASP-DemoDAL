@@ -85,7 +85,7 @@ namespace DAL.Services
                     command.Parameters.AddWithValue(nameof(Cocktail.Name), cocktail.Name);
                     command.Parameters.AddWithValue(nameof(Cocktail.Description), (object?)cocktail.Description ?? DBNull.Value);
                     command.Parameters.AddWithValue(nameof(Cocktail.Instructions), cocktail.Instructions);
-                    command.Parameters.AddWithValue(nameof(Cocktail.CreatedBy), (object?)cocktail.CreatedBy ?? DBNull.Value);
+                    command.Parameters.AddWithValue("user_id", (object?)cocktail.CreatedBy ?? DBNull.Value);
                     connection.Open();
                     return (Guid)command.ExecuteScalar();
                 }
