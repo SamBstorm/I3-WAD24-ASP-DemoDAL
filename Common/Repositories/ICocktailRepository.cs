@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Repositories
 {
-    public interface ICocktailRepository<TCocktail>
+    public interface ICocktailRepository<TCocktail> : ICRUDRepository<TCocktail, Guid>
     {
-        IEnumerable<TCocktail> Get();
-        TCocktail Get(Guid cocktail_id);
-        Guid Insert(TCocktail cocktail);
-        void Update(Guid cocktail_id, TCocktail cocktail);
-        void Delete(Guid cocktail_id);
     }
 }

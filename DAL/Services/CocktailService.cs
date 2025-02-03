@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Mappers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,12 +12,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class CocktailService : ICocktailRepository<Cocktail>
+    public class CocktailService : BaseService, ICocktailRepository<Cocktail>
     {
-        private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WAD24-DemoASP-DB;Integrated Security=True;";
+        public CocktailService(IConfiguration config) : base(config, "Main-DB") { }
+
         public void Delete(Guid cocktail_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
@@ -31,7 +33,7 @@ namespace DAL.Services
 
         public IEnumerable<Cocktail> Get()
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
@@ -51,7 +53,7 @@ namespace DAL.Services
 
         public Cocktail Get(Guid cocktail_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
@@ -76,7 +78,7 @@ namespace DAL.Services
 
         public Guid Insert(Cocktail cocktail)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
@@ -94,7 +96,7 @@ namespace DAL.Services
 
         public void Update(Guid cocktail_id, Cocktail cocktail)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {

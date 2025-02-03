@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.Repositories
 {
-    public interface IUserRepository<TUser>
+    public interface IUserRepository<TUser> : ICRUDRepository<TUser, Guid>
     {
-        IEnumerable<TUser> Get();
-        TUser Get(Guid id);
-        Guid Insert(TUser user);
-        void Update(Guid id, TUser user);
-        void Delete(Guid id);
         Guid CheckPassword(string email, string password);
     }
 }
