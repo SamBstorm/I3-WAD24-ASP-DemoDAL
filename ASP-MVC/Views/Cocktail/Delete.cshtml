@@ -1,0 +1,38 @@
+﻿@model ASP_MVC.Models.Cocktail.CocktailDelete
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Voulez-vous vraiment supprimer ce cocktail : @Model.Name ?</h1>
+
+<h3>Une fois supprimé, plus possible de retrouvé ce cocktail! Ni les commentaires!</h3>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="row">
+        @if(Model.Description is not null)
+        {
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        }
+        @if(Model.CreatedBy is not null){
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+        }
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+        <a asp-action="Index">Revenir à la liste</a>
+    </form>
+</div>
