@@ -1,3 +1,4 @@
+using ASP_MVC.Handlers;
 using Common.Repositories;
 
 namespace ASP_MVC
@@ -10,6 +11,10 @@ namespace ASP_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Ajout d'implémentation du service d'accès à l'HttpContext
+            //(dans le but d'atteindre nos variables de session en dehors du controller ou de la vue)
+            builder.Services.AddHttpContextAccessor();
 
             //Ajout d'implémentation des services nécessaires à l'utilisation de session :
             builder.Services.AddDistributedMemoryCache();
@@ -26,6 +31,8 @@ namespace ASP_MVC
                 options.Secure = CookieSecurePolicy.Always;
             });
 
+            //Ajout de notre service de sessionManager
+            builder.Services.AddScoped<SessionManager>();
 
             //Ajout de nos services : Ceux de la BLL et ceux de la DAL
             builder.Services.AddScoped<IUserRepository<BLL.Entities.User>, BLL.Services.UserService>();

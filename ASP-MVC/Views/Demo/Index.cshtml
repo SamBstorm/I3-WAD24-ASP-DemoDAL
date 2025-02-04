@@ -1,0 +1,8 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int count = ViewContext.HttpContext.Session.GetInt32("CountVisitedPage") ?? 0;
+}
+
+<h1>Nombre de pages visitées : @count</h1>
