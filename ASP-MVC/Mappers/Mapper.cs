@@ -27,7 +27,8 @@ namespace ASP_MVC.Mappers
                 First_Name = user.First_Name,
                 Last_Name = user.Last_Name,
                 Email = user.Email,
-                CreatedAt = DateOnly.FromDateTime(user.CreatedAt)
+                CreatedAt = DateOnly.FromDateTime(user.CreatedAt),
+                Cocktails = user.Cocktails.Select(bll => bll.ToListItem())
             };
         }
 
