@@ -15,6 +15,8 @@ namespace ASP_MVC.Models.Cocktail
         [DataType(DataType.MultilineText)]
         public string Instructions { get; set; }
         [DisplayName("Créé par : ")]
+        public string? Creator { get; set; }
+        [ScaffoldColumn(false)]
         public Guid? CreatedBy { get; set; }
         [DisplayName("Créé le : ")]
         [DataType(DataType.Date)]

@@ -23,6 +23,9 @@ namespace BLL.Entities
         {
             get { return _disabledAt is not null; }
         }
+
+        public IEnumerable<Cocktail> Cocktails { get; set; }
+
         public User(Guid user_Id, string first_Name, string last_Name, string email, string password, DateTime createdAt, DateTime? disabledAt)
         {
             User_Id = user_Id;

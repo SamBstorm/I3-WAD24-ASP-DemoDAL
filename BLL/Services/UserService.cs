@@ -12,39 +12,46 @@ namespace BLL.Services
 {
     public class UserService : IUserRepository<User>
     {
-        private IUserRepository<DAL.Entities.User> _service;
+        private IUserRepository<DAL.Entities.User> _userService;
+        private ICocktailRepository<DAL.Entities.Cocktail> _cocktailService;
 
-        public UserService(IUserRepository<DAL.Entities.User> userService)
+        public UserService(
+            IUserRepository<DAL.Entities.User> userService,
+            ICocktailRepository<DAL.Entities.Cocktail> cocktailService
+            )
         {
-            _service = userService;    
+            _userService = userService;
+            _cocktailService = cocktailService;
         }
 
         public IEnumerable<User> Get()
         {
-            return _service.Get().Select(dal => dal.ToBLL());
+            return _userService.Get().Select(dal => dal.ToBLL());
         }
 
         public User Get(Guid user_id) { 
-            return _service.Get(user_id).ToBLL();
+            User user = _userService.Get(user_id).ToBLL();
+            user.Cocktails = _cocktailService.GetFromUser(user_id).Select(dal => dal.ToBLL());
+            return user;
         }
 
         public Guid Insert(User user)
         {
-            return _service.Insert(user.ToDAL());
+            return _userService.Insert(user.ToDAL());
         }
 
         public void Update(Guid user_id, User user)
         {
-            _service.Update(user_id, user.ToDAL());
+            _userService.Update(user_id, user.ToDAL());
         }
 
         public void Delete(Guid user_id) {
-            _service.Delete(user_id);
+            _userService.Delete(user_id);
         }
 
         public Guid CheckPassword(string email, string password)
         {
-            return _service.CheckPassword(email, password);
+            return _userService.CheckPassword(email, password);
         }
     }
 }

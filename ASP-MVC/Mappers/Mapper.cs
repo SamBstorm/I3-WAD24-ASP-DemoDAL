@@ -112,6 +112,7 @@ namespace ASP_MVC.Mappers
                 Description = cocktail.Description,
                 Instructions = cocktail.Instructions,
                 CreatedAt = cocktail.CreatedAt,
+                Creator = (cocktail.Creator is null) ? null : $"{cocktail.Creator.First_Name} {cocktail.Creator.Last_Name}",
                 CreatedBy = cocktail.CreatedBy
             };
         }

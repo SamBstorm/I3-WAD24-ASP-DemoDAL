@@ -24,12 +24,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Instructions)
         </dd>
-        @if(Model.CreatedBy is not null){
+        @if(Model.Creator is not null){
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedBy)
+                @Html.DisplayNameFor(model => model.Creator)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CreatedBy)
+                <a asp-action="Details" asp-controller="User" asp-route-id="@Model.CreatedBy">@Html.DisplayFor(model => model.Creator)</a>
             </dd>
         }
     </dl>

@@ -76,6 +76,27 @@ namespace DAL.Services
             }
         }
 
+        public IEnumerable<Cocktail> GetFromUser(Guid user_id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Cocktail_GetByUserId";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(user_id), user_id);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToCocktail();
+                        }
+                    }
+                }
+            }
+        }
+
         public Guid Insert(Cocktail cocktail)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
