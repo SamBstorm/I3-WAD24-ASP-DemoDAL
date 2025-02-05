@@ -1,4 +1,5 @@
 ﻿using ASP_MVC.Handlers;
+using ASP_MVC.Handlers.ActionFilters;
 using ASP_MVC.Mappers;
 using ASP_MVC.Models.Cocktail;
 using BLL.Entities;
@@ -52,6 +53,7 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Create
+        [ConnectionNeeded]
         public ActionResult Create()
         {
             return View();
@@ -60,6 +62,7 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ConnectionNeeded]
         public ActionResult Create(CocktailCreateForm form)
         {
             try
@@ -75,6 +78,7 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Edit/5
+        [ConnectionNeeded]
         public ActionResult Edit(Guid id)
         {
             try
@@ -91,6 +95,7 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ConnectionNeeded]
         public ActionResult Edit(Guid id, CocktailEditForm form)
         {
             try
@@ -106,6 +111,7 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Delete/5
+        [ConnectionNeeded]
         public ActionResult Delete(Guid id)
         {
             try
@@ -122,6 +128,7 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ConnectionNeeded]
         public ActionResult Delete(Guid id, CocktailDelete form)
         {
             try

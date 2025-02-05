@@ -2,13 +2,16 @@
 
 @{
     ViewData["Title"] = "Index";
+    bool isConnected = sessionManager.ConnectedUser is not null;
 }
 
 <h1>🍹Cocktails</h1>
 
-<p>
-    <a asp-action="Create">Ajouter un cocktail</a>
-</p>
+@if(isConnected){
+    <p>
+        <a asp-action="Create">Ajouter un cocktail</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -31,9 +34,13 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                    @Html.ActionLink("Modifier", "Edit", new { id = item.Cocktail_Id }) |
-                    @Html.ActionLink("Plus d'infos", "Details", new { id = item.Cocktail_Id }) |
-                    @Html.ActionLink("Supprimer", "Delete", new { id = item.Cocktail_Id })
+                @if(isConnected){
+                        <span>@Html.ActionLink("Modifier", "Edit", new { id = item.Cocktail_Id }) |</span>
+                }
+                    <span>@Html.ActionLink("Plus d'infos", "Details", new { id = item.Cocktail_Id })</span> 
+                @if(isConnected){
+                        <span>| @Html.ActionLink("Supprimer", "Delete", new { id = item.Cocktail_Id })</span>
+                }
             </td>
         </tr>
 }

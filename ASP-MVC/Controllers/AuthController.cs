@@ -59,12 +59,14 @@ namespace ASP_MVC.Controllers
             }
         }
 
+        [ConnectionNeeded]
         public IActionResult Logout()
         {
             return View();
         }
 
         [HttpPost]
+        [ConnectionNeeded]
         public IActionResult Logout(IFormCollection form)
         {
             try
