@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ASP_MVC.Models.Cocktail.CocktailListItemMin>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@if(Model.Count() > 0){
+    foreach (var item in Model) {
+            <tr>
+                <td>
+                <a asp-action="Details" asp-controller="Cocktail" asp-route-id="@item.Cocktail_Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+            </tr>
+    }
+}
+else{
+    <tr>
+        <td>
+            <p>Pas de cocktail actuellement</p>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

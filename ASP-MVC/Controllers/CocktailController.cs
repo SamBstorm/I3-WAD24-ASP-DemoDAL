@@ -1,4 +1,5 @@
-﻿using ASP_MVC.Mappers;
+﻿using ASP_MVC.Handlers;
+using ASP_MVC.Mappers;
 using ASP_MVC.Models.Cocktail;
 using BLL.Entities;
 using Common.Repositories;
@@ -10,10 +11,15 @@ namespace ASP_MVC.Controllers
     public class CocktailController : Controller
     {
         private ICocktailRepository<Cocktail> _cocktailRepository;
+        private SessionManager _sessionManager;
 
-        public CocktailController(ICocktailRepository<Cocktail> cocktailRepository)
+        public CocktailController(
+            ICocktailRepository<Cocktail> cocktailRepository,
+            SessionManager sessionManager
+            )
         {
             _cocktailRepository = cocktailRepository;
+            _sessionManager = sessionManager;
         }
 
         // GET: CocktailController
@@ -36,6 +42,7 @@ namespace ASP_MVC.Controllers
             try
             {
                 CocktailDetails model = _cocktailRepository.Get(id).ToDetails();
+                _sessionManager.AddVisitedCocktail(model.Cocktail_Id, model.Name);
                 return View(model);
             }
             catch (Exception)
