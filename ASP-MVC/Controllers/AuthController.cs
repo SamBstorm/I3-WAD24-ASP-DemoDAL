@@ -1,4 +1,5 @@
 ﻿using ASP_MVC.Handlers;
+using ASP_MVC.Handlers.ActionFilters;
 using ASP_MVC.Models.Auth;
 using BLL.Entities;
 using Common.Repositories;
@@ -25,12 +26,19 @@ namespace ASP_MVC.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        [AnonymousNeeded]
         public IActionResult Login()
         {
+            /* Méthode compliquée de vérifier si l'utilisateur à le droit ou non d'accéder à la page...
+            if(_sessionManager.ConnectedUser is not null)
+            {
+                return RedirectToAction("Index", "Home");
+            }*/
             return View();
         }
 
         [HttpPost]
+        [AnonymousNeeded]
         public IActionResult Login(AuthLoginForm form) {
             try
             {

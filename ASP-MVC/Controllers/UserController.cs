@@ -1,4 +1,5 @@
-﻿using ASP_MVC.Mappers;
+﻿using ASP_MVC.Handlers.ActionFilters;
+using ASP_MVC.Mappers;
 using ASP_MVC.Models.User;
 using BLL.Entities;
 using Common.Repositories;
@@ -44,6 +45,8 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: UserController/Create
+
+        [AnonymousNeeded]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +55,7 @@ namespace ASP_MVC.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AnonymousNeeded]
         public ActionResult Create(UserCreateForm form)
         {
             try
