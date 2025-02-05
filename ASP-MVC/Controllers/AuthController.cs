@@ -45,12 +45,15 @@ namespace ASP_MVC.Controllers
                 if (!ModelState.IsValid) throw new ArgumentException(nameof(form));
                 Guid id = _userService.CheckPassword(form.Email, form.Password);
                 //C'est ici que nous définirons la variable de session
-                ConnectedUser user = new ConnectedUser() { 
-                    User_Id = id,
-                    Email = form.Email,
-                    ConnectedAt = DateTime.Now
+                User user = _userService.Get(id);
+
+                ConnectedUser sessionUser = new ConnectedUser() { 
+                    User_Id = user.User_Id,
+                    Email = user.Email,
+                    ConnectedAt = DateTime.Now,
+                    Role = user.Role.ToString()
                 };
-                _sessionManager.Login(user);
+                _sessionManager.Login(sessionUser);
                 return RedirectToAction("Details", "User", new { id = id });
             }
             catch (Exception)

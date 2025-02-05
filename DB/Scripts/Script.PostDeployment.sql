@@ -9,6 +9,9 @@ Modèle de script de post-déploiement
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+-- Ajout des rôles nécessaire à l'application : User et Admin
+INSERT INTO [Role] VALUES ('User'),('Admin');
+
 -- Déclaration de la table variable pour stocker les IDs insérés
 DECLARE @InsertedUserIds TABLE (UserId UNIQUEIDENTIFIER);
 
@@ -19,6 +22,7 @@ EXEC SP_User_Insert @first_name = N'John', @last_name = N'Doe', @email = N'john.
 
 DECLARE @User1Id UNIQUEIDENTIFIER;
 SELECT @User1Id = UserId FROM @InsertedUserIds;
+EXEC SP_User_ChangeRole @user_id=@User1Id, @role = N'Admin'
 DELETE FROM @InsertedUserIds;
 
 INSERT INTO @InsertedUserIds (UserId)

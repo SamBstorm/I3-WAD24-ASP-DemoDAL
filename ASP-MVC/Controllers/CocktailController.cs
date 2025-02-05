@@ -78,7 +78,7 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Edit/5
-        [ConnectionNeeded]
+        [ConnectionNeeded("Details", "Cocktail", true)]
         public ActionResult Edit(Guid id)
         {
             try

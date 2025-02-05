@@ -42,7 +42,8 @@ namespace ASP_MVC.Mappers
                 user.Email,
                 user.Password,
                 DateTime.Now,
-                null
+                null,
+                "User"
                 );
             /*return new User(
                 user.First_Name,
@@ -72,7 +73,8 @@ namespace ASP_MVC.Mappers
                 user.Email,
                 "********",
                 DateTime.Now,
-                null
+                null,
+                "User"
                 );*/
             return new User(
                 user.First_Name,

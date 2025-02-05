@@ -21,7 +21,8 @@ namespace BLL.Mappers
                 user.Email,
                 user.Password,
                 user.CreatedAt,
-                user.DisabledAt);
+                user.DisabledAt,
+                user.Role);
         }
 
         public static D.User ToDAL(this User user)
@@ -35,7 +36,8 @@ namespace BLL.Mappers
                 Email = user.Email,
                 Password = user.Password,
                 CreatedAt = user.CreatedAt,
-                DisabledAt = (user.IsDisabled) ? new DateTime() : null
+                DisabledAt = (user.IsDisabled) ? new DateTime() : null,
+                Role = user.Role.ToString()
             };
         }
         #endregion
