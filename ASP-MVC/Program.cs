@@ -17,7 +17,17 @@ namespace ASP_MVC
             builder.Services.AddHttpContextAccessor();
 
             //Ajout d'implémentation des services nécessaires à l'utilisation de session :
-            builder.Services.AddDistributedMemoryCache();
+            //AddDistributedMemoryCache : Pour le développment et debbugage
+            //builder.Services.AddDistributedMemoryCache();
+            //AddDistributedSqlServerCache : Pour un projet client, une release fonctionnelle
+            builder.Services.AddDistributedSqlServerCache(
+                options =>
+                {
+                    options.ConnectionString = builder.Configuration.GetConnectionString("Session-DB");
+                    options.SchemaName = "dbo";
+                    options.TableName = "Session";
+                }
+                );
             builder.Services.AddSession(
                 options => {
                     options.Cookie.Name = "CookieWad24";
