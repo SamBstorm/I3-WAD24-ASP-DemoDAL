@@ -78,14 +78,18 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Edit/5
-        [ConnectionNeeded("Details", "Cocktail", true)]
+        //[ConnectionNeeded("Details", "Cocktail", true)]
+        [IsCreator]
         public ActionResult Edit(Guid id)
         {
             try
-            {
+        {
+                /* Si nous devions vérifier si l'utilisateur connecté est le créateur, nous devrions passez par ces instructions
+                 * Mais il est préférable de le définir dans un attribut IAuthorizationFilter
                 Cocktail cocktail = _cocktailRepository.Get(id);
                 if (!(_sessionManager.ConnectedUser?.User_Id == cocktail.CreatedBy)) throw new InvalidOperationException("Vous n'êtes pas l'auteur de ce cocktail!");
-                CocktailEditForm model = cocktail.ToEditForm();
+                CocktailEditForm model = cocktail.ToEditForm();*/
+                CocktailEditForm model = _cocktailRepository.Get(id).ToEditForm();
                 return View(model);
             }
             catch (Exception ex)
@@ -98,7 +102,8 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ConnectionNeeded]
+        //[ConnectionNeeded]
+        [IsCreator]
         public ActionResult Edit(Guid id, CocktailEditForm form)
         {
             try
@@ -114,7 +119,8 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Delete/5
-        [ConnectionNeeded]
+        //[ConnectionNeeded]
+        [IsCreator]
         public ActionResult Delete(Guid id)
         {
             try
@@ -131,7 +137,8 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ConnectionNeeded]
+        //[ConnectionNeeded]
+        [IsCreator]
         public ActionResult Delete(Guid id, CocktailDelete form)
         {
             try
