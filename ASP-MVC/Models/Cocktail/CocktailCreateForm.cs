@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_MVC.Models.Cocktail
 {
@@ -19,8 +20,7 @@ namespace ASP_MVC.Models.Cocktail
         [Required(ErrorMessage = "Le champ 'Recette' est obligatoire.")]
         [MinLength(2, ErrorMessage = "Le champ 'Recette' doit contenir au minimum 2 caractères.")]
         public string Instructions { get; set; }
-        [DisplayName("Créé par : ")]
-        [Required(ErrorMessage = "Veuillez sélectionner un créateur.")]
+        [HiddenInput]
         public Guid CreatedBy { get; set; }
     }
 }

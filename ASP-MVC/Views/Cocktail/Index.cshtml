@@ -5,6 +5,13 @@
     bool isConnected = sessionManager.ConnectedUser is not null;
 }
 
+@if(TempData.ContainsKey("ErrorMessage")){
+    <div class="alert alert-danger alert-dismissible show fade" role="alert">
+        <p>@TempData["ErrorMessage"]</p>
+        <button class="btn-close btn" data-bs-dismiss="alert"></button>
+    </div>
+}
+
 <h1>🍹Cocktails</h1>
 
 @if(isConnected){

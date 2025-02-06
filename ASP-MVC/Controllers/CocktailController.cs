@@ -83,11 +83,14 @@ namespace ASP_MVC.Controllers
         {
             try
             {
-                CocktailEditForm model = _cocktailRepository.Get(id).ToEditForm();
+                Cocktail cocktail = _cocktailRepository.Get(id);
+                if (!(_sessionManager.ConnectedUser?.User_Id == cocktail.CreatedBy)) throw new InvalidOperationException("Vous n'êtes pas l'auteur de ce cocktail!");
+                CocktailEditForm model = cocktail.ToEditForm();
                 return View(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction(nameof(Index));
             }
         }

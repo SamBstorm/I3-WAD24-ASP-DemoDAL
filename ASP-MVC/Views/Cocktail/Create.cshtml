@@ -1,20 +1,12 @@
-﻿@using Common.Repositories
-@using BLL.Entities
-@inject IUserRepository<User> _userService;
-
-@model ASP_MVC.Models.Cocktail.CocktailCreateForm
+﻿@model ASP_MVC.Models.Cocktail.CocktailCreateForm
 
 @{
     ViewData["Title"] = "Create";
-
-    IEnumerable<SelectListItem> userOptions = _userService.Get().Select(
-        bll => new SelectListItem() {Value = bll.User_Id.ToString(), Text = $"{bll.First_Name} {bll.Last_Name}"}
-    );
 }
 
-<h1>🍸Quel nouveau cocktail allez-vous nous servir?</h1>
+<h1>Ajoutez votre création!</h1>
 
-<h4>Veuillez remplir le formulaire</h4>
+<h4>Veuillez remplir le formulaire : </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -36,14 +28,10 @@
                 <span asp-validation-for="Instructions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <select asp-for="CreatedBy" asp-items="userOptions" class="form-control">
-                    <option disabled selected>Veuillez sélectionner un utilisateur</option>
-                </select>
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                <input asp-for="CreatedBy" value="@sessionManager.ConnectedUser?.User_Id" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Servir!" class="btn btn-primary" />
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
             </div>
         </form>
     </div>
