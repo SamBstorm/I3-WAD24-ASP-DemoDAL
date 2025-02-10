@@ -186,6 +186,17 @@ namespace ASP_MVC.Mappers
                 Creator = comment.CreatedBy is null ? null : $"{comment?.Creator?.First_Name} {comment?.Creator?.Last_Name}",
             };
         }
+        public static Comment ToBLL(this CommentCreateForm comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new Comment(
+                comment.Title,
+                comment.Content,
+                comment.Concern,
+                comment.CreatedBy,
+                comment.Note
+                );
+        }
         #endregion
     }
 }

@@ -41,6 +41,7 @@ namespace BLL.Entities
             Content = content;
             _concern = concern;
             _createdBy = createdBy;
+            CreatedAt = createdAt; 
             Note = note;
         }
 

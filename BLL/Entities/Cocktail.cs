@@ -55,7 +55,7 @@ namespace BLL.Entities
         {
             if(comment is null) throw new ArgumentNullException(nameof(comment));
             if (_comments.Contains(comment)) throw new ArgumentException("Ce commentaire a déjà été ajouté à ce cocktail.", nameof(comment));
-            if (comment.Cocktail != this) throw new InvalidOperationException("Le commentaire n'appartient pas à ce cocktail");
+            if (comment.Concern != Cocktail_Id) throw new InvalidOperationException("Le commentaire n'appartient pas à ce cocktail");
             if (_comments.Select(c => c.Creator).Distinct().Contains(comment.Creator)) throw new InvalidOperationException("L'utilisateur ne peut commenter deux fois le même cocktail.");
             _comments.Add(comment);
         }

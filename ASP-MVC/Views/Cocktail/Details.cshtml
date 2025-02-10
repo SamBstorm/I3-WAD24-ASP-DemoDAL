@@ -40,5 +40,8 @@
         <a asp-action="Index">Retour à la liste</a>
     </div>
 }
-<partial name="_CommentCreateForm" />
+@if (sessionManager.ConnectedUser is not null && sessionManager.ConnectedUser.User_Id != Model.CreatedBy)
+{
+    <partial name="_CommentCreateForm" model="@(new CommentCreateForm())"/>
+}
 <partial name="_CocktailCommentList" model="Model.Comments" />

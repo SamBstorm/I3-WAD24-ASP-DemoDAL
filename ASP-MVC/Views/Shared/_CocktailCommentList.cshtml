@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <p>@Html.DisplayNameFor(modelItem => item.CreatedAt)@Html.DisplayFor(modelItem => item.CreatedAt)</p>
-                <p>@Html.DisplayNameFor(modelItem => item.Creator)@Html.DisplayFor(modelItem => item.Creator)</p>
+                <p>@Html.DisplayNameFor(modelItem => item.Creator)<a asp-action="Details" asp-controller="User" asp-route-id="@item.CreatedBy">@item.Creator</a></p>
                 <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
                 @if(item.Note is not null){
                     <h6 class="card-subtitle">
