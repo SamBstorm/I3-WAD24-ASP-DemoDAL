@@ -34,7 +34,11 @@
         }
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.Cocktail_Id }) |
-    <a asp-action="Index">Retour à la liste</a>
-</div>
+@if(sessionManager.ConnectedUser is not null && sessionManager.ConnectedUser.User_Id == Model.CreatedBy){
+    <div>
+        @Html.ActionLink("Modifier", "Edit", new { id = Model.Cocktail_Id }) |
+        <a asp-action="Index">Retour à la liste</a>
+    </div>
+}
+<partial name="_CommentCreateForm" />
+<partial name="_CocktailCommentList" model="Model.Comments" />

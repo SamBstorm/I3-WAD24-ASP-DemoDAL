@@ -31,7 +31,7 @@ namespace BLL.Services
 
         public User Get(Guid user_id) { 
             User user = _userService.Get(user_id).ToBLL();
-            user.Cocktails = _cocktailService.GetFromUser(user_id).Select(dal => dal.ToBLL());
+            user.SetCocktails(_cocktailService.GetFromUser(user_id).Select(dal => dal.ToBLL()));
             return user;
         }
 

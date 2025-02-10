@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ASP_MVC.Models.Comment.CommentListItem>
+
+<div>
+    @foreach (CommentListItem item in Model)
+    { 
+        <div class="card">
+            <div class="card-body">
+                <p>@Html.DisplayNameFor(modelItem => item.CreatedAt)@Html.DisplayFor(modelItem => item.CreatedAt)</p>
+                <p>@Html.DisplayNameFor(modelItem => item.Creator)@Html.DisplayFor(modelItem => item.Creator)</p>
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                @if(item.Note is not null){
+                    <h6 class="card-subtitle">
+                        @for (int i = 0; i < item.Note; i++) { 
+                        <span>⭐</span>
+                        }
+                    </h6>
+                }
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Content)</p>
+            </div>
+        </div>
+    }
+</div>

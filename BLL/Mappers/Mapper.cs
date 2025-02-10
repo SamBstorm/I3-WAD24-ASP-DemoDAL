@@ -51,7 +51,7 @@ namespace BLL.Mappers
                 cocktail.Name,
                 cocktail.Description,
                 cocktail.Instructions,
-                DateOnly.FromDateTime(cocktail.CreatedAt),
+                cocktail.CreatedAt,
                 cocktail.CreatedBy
                 );
         }
@@ -67,6 +67,36 @@ namespace BLL.Mappers
                 Instructions = cocktail.Instructions,
                 CreatedAt = cocktail.CreatedAt.ToDateTime(new TimeOnly()),
                 CreatedBy = cocktail.CreatedBy
+            };
+        }
+        #endregion
+        #region Comments
+        public static Comment ToBLL(this D.Comment comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new Comment(
+                comment.Comment_Id,
+                comment.Title,
+                comment.Content,
+                comment.Concern,
+                comment.CreatedBy,
+                comment.CreatedAt,
+                comment.Note
+                );
+        }
+
+        public static D.Comment ToDAL(this Comment comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new D.Comment()
+            {
+                Comment_Id = comment.Comment_Id,
+                Title = comment.Title,
+                Content = comment.Content,
+                Concern = comment.Concern,
+                CreatedBy = comment.CreatedBy,
+                CreatedAt = comment.CreatedAt,
+                Note = comment.Note
             };
         }
         #endregion

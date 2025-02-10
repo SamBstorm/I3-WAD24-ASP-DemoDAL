@@ -35,7 +35,7 @@ namespace BLL.Services
             {
                 if (cocktail.CreatedBy is not null)
                 {
-                    cocktail.Creator = _userService.Get((Guid)cocktail.CreatedBy).ToBLL();
+                    cocktail.SetCreator(_userService.Get((Guid)cocktail.CreatedBy).ToBLL());
                 }
             }
             return cocktails;
@@ -46,7 +46,7 @@ namespace BLL.Services
             Cocktail cocktail = _cocktailService.Get(cocktail_id).ToBLL();
             if(cocktail.CreatedBy is not null)
             {
-                cocktail.Creator = _userService.Get((Guid)cocktail.CreatedBy).ToBLL();
+                cocktail.SetCreator(_userService.Get((Guid)cocktail.CreatedBy).ToBLL());
             }
             return cocktail;
         }

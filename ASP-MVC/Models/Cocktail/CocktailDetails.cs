@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ASP_MVC.Models.Comment;
 
 namespace ASP_MVC.Models.Cocktail
 {
@@ -21,5 +22,7 @@ namespace ASP_MVC.Models.Cocktail
         [DisplayName("Créé le : ")]
         [DataType(DataType.Date)]
         public DateOnly CreatedAt { get; set; }
+        [DisplayName("Commentaires : ")]
+        public IEnumerable<CommentListItem> Comments { get; set; }
     }
 }

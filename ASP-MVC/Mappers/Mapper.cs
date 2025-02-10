@@ -1,4 +1,5 @@
 ﻿using ASP_MVC.Models.Cocktail;
+using ASP_MVC.Models.Comment;
 using ASP_MVC.Models.User;
 using BLL.Entities;
 
@@ -116,7 +117,8 @@ namespace ASP_MVC.Mappers
                 Instructions = cocktail.Instructions,
                 CreatedAt = cocktail.CreatedAt,
                 Creator = (cocktail.Creator is null) ? null : $"{cocktail.Creator.First_Name} {cocktail.Creator.Last_Name}",
-                CreatedBy = cocktail.CreatedBy
+                CreatedBy = cocktail.CreatedBy,
+                Comments = cocktail.Comments.Select(c => c.ToListItem())
             };
         }
 
@@ -128,7 +130,7 @@ namespace ASP_MVC.Mappers
                 cocktail.Name,
                 cocktail.Description,
                 cocktail.Instructions,
-                DateOnly.FromDateTime(DateTime.Now),
+                DateTime.Now,
                 cocktail.CreatedBy
                 );
         }
@@ -152,7 +154,7 @@ namespace ASP_MVC.Mappers
                 cocktail.Name,
                 cocktail.Description,
                 cocktail.Instructions,
-                DateOnly.FromDateTime(DateTime.Now),
+                DateTime.Now,
                 Guid.Empty
                 );
         }
@@ -165,6 +167,23 @@ namespace ASP_MVC.Mappers
                 Name= cocktail.Name,
                 Description= cocktail.Description,
                 CreatedBy = cocktail.CreatedBy
+            };
+        }
+        #endregion
+        #region Comments
+        public static CommentListItem ToListItem(this Comment comment)
+        {
+            if(comment is null) throw new ArgumentNullException( nameof(comment));
+            return new CommentListItem()
+            {
+                Comment_Id = comment.Comment_Id,
+                Title = comment.Title,
+                Content = comment.Content,
+                CreatedAt = comment.CreatedAt,
+                CreatedBy = comment.CreatedBy,
+                Concern = comment.Concern,
+                Cocktail = comment.Cocktail.Name,
+                Creator = comment.CreatedBy is null ? null : $"{comment?.Creator?.First_Name} {comment?.Creator?.Last_Name}",
             };
         }
         #endregion
