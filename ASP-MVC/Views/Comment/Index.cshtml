@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ASP_MVC.Models.Comment.CommentListItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vos Commentaires</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-controller="Cocktail" asp-route-id="@item.Concern">@Html.DisplayFor(modelItem => item.Cocktail)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @((item.Content.Length >= 100) ? item.Content.Substring(0,97) + "..." : item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Comment_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Comment_Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

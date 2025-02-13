@@ -1,27 +1,20 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace ASP_MVC.Models.Comment
 {
-    public class CommentListItem
+    public class CommentDelete
     {
-        [ScaffoldColumn(false)]
-        public Guid Comment_Id { get; set; }
         [DisplayName("Titre :")]
         public string Title { get; set; }
         [DisplayName("Commentaire : ")]
         public string Content { get; set; }
         [DisplayName("Cocktail : ")]
         public string Cocktail { get; set; }
-        [ScaffoldColumn(false)]
-        public Guid Concern { get; set;}
-        [DisplayName("écrit par :")]
-        public string? Creator { get; set; }
-        [ScaffoldColumn(false)]
-        public Guid? CreatedBy { get; set; }
         [DisplayName("Rédigé le :")]
         [DataType("datetime-local")]
         public DateTime CreatedAt { get; set; }
+        [DisplayName("Avec la note de : ")]
         public int? Note { get; set; }
     }
 }

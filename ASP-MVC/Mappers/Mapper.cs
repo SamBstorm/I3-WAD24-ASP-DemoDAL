@@ -186,6 +186,42 @@ namespace ASP_MVC.Mappers
                 Creator = comment.CreatedBy is null ? null : $"{comment?.Creator?.First_Name} {comment?.Creator?.Last_Name}",
             };
         }
+
+        public static CommentEditForm ToEditForm(this Comment comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new CommentEditForm()
+            {
+                Title = comment.Title,
+                Content = comment.Content,
+                CreatedBy = (Guid)comment.CreatedBy!,
+                Concern = comment.Concern
+            };
+        }
+        public static CommentDelete ToDelete(this Comment comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new CommentDelete()
+            {
+                Title = comment.Title,
+                Content = comment.Content,
+                Cocktail = comment.Cocktail!.Name,
+                CreatedAt = comment.CreatedAt,
+                Note = comment.Note
+            };
+        }
+
+        public static Comment ToBLL(this CommentEditForm comment)
+        {
+            if (comment is null) throw new ArgumentNullException(nameof(comment));
+            return new Comment(
+                comment.Title,
+                comment.Content,
+                comment.Concern,
+                comment.CreatedBy,
+                comment.Note
+                );
+        }
         public static Comment ToBLL(this CommentCreateForm comment)
         {
             if (comment is null) throw new ArgumentNullException(nameof(comment));

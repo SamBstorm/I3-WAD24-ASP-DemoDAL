@@ -59,7 +59,7 @@ namespace BLL.Services
 
         public IEnumerable<Comment> GetByUserId(Guid user_id)
         {
-            IEnumerable<Comment> comments = _commentService.GetByUserId(user_id).Select(dal => dal.ToBLL());
+            Comment[] comments = _commentService.GetByUserId(user_id).Select(dal => dal.ToBLL()).ToArray();
             User user = _userService.Get(user_id).ToBLL();
             foreach (Comment comment in comments)
             {

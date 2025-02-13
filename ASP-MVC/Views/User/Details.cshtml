@@ -38,8 +38,12 @@
     <h4>@Html.DisplayNameFor(model => model.Cocktails)</h4>
     @* @Html.Partial("_CocktailsList", Model.Cocktails) *@
     <partial name="_CocktailsList" model="Model.Cocktails"/>
+    @if(sessionManager.ConnectedUser is not null && sessionManager.ConnectedUser.User_Id == Guid.Parse(ViewContext.RouteData.Values["id"]!.ToString()!))
+    {
+        <h4>Vos commentaires :</h4>
+        <a asp-action="Index" asp-controller="Comment">Voir la liste ici</a>
+    }
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.User_Id }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edit", "Modifier le profil", new { id = Model.User_Id })
 </div>
